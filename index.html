@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Login</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+  </head>
+  <body>
+    <div class="flex items-center justify-center min-h-screen bg-gray-100">
+      <div class="bg-white border rounded-md w-[320px]">
+        <div class="bg-gray-100 px-4 py-2 border-b text-center font-medium">
+          Sign in to your dashboard
+        </div>
+
+        <form id="loginForm" class="p-4 space-y-4">
+          <div id="errorMessage" class="text-red-500 hidden text-sm"></div>
+
+          <div>
+            <input
+              id="username"
+              type="text"
+              placeholder="Username"
+              class="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
+            />
+            <p id="usernameError" class="text-sm text-red-500 mt-1 hidden">
+              Username is required
+            </p>
+          </div>
+
+          <div>
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              class="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
+            />
+            <p id="passwordError" class="text-sm text-red-500 mt-1 hidden">
+              Password is required
+            </p>
+            <p id="minError" class="text-sm text-red-500 mt-1 hidden">
+              Password must be at least 6 characters
+            </p>
+          </div>
+
+          <button
+            type="submit"
+            id="loginButton"
+            class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded"
+          >
+            SIGN IN
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>
