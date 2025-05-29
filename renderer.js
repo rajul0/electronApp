@@ -30,7 +30,6 @@ document
 
     if (hasError) return;
 
-    // ⏳ Mulai loading
     loginButton.disabled = true;
     loginButton.textContent = "Loading...";
 
@@ -43,14 +42,18 @@ document
 
       if (res.ok) {
         const data = await res.json();
+
         await window.pouchdb.saveUser(username, password);
         alert("Login success!");
         window.location.href = "dashboard.html";
       } else {
         const errText = await res.text();
-        throw new Error(res.status);
+        throw new Error("INVALID_CREDENTIALS");
       }
     } catch (err) {
+      const isOffline =
+        !navigator.onLine || err.message !== "INVALID_CREDENTIALS";
+
       const localUser = await window.pouchdb.getUser(username);
       if (localUser) {
         const valid = await window.pouchdb.verifyPassword(
@@ -64,7 +67,10 @@ document
         }
       }
 
-      errorBox.textContent = "Login Failed, Invalid credentials";
+      const errorBox = document.getElementById("errorMessage");
+      errorBox.textContent = isOffline
+        ? "Login failed (Offline mode): Invalid local credentials"
+        : "Login failed: Invalid username or password";
       errorBox.classList.remove("hidden");
     } finally {
       loginButton.disabled = false;

@@ -28,8 +28,9 @@ async function saveUser(username, password) {
 }
 
 async function getUser(username) {
+  const userId = `user:${username}`;
   try {
-    return await db.get(username);
+    return await db.get(userId);
   } catch (err) {
     return null;
   }
